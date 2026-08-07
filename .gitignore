@@ -1,5 +1,12 @@
 node_modules/
 dist/
-coverage/
 .biome/
+build/
+output/
+coverage/
 *.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example
+.pi-subagents/**

@@ -1,0 +1,31 @@
+{
+  "name": "ai-agents",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.5.1",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev": "pnpm --parallel -r run dev",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:cov": "vitest run --coverage",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "pnpm -r run build && changeset publish"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "@changesets/cli": "^3.0.3",
+    "@vitest/coverage-v8": "^5.0.1",
+    "publint": "^0.3.24",
+    "tsdown": "^0.23.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  }
+}

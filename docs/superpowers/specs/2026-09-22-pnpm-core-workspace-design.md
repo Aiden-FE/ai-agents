@@ -149,10 +149,12 @@ export default defineConfig({
 ### `packages/core/src/index.ts`（示例）
 
 ```ts
-export function hello(name = 'world'): string {
+export function hello(name: string = 'world'): string {
   return `Hello, ${name}!`
 }
 ```
+
+> 注意：参数显式标注 `string`，以满足 `isolatedDeclarations` 对导出函数参数必须有可复制类型注解的要求。
 
 ### `packages/core/src/index.test.ts`
 

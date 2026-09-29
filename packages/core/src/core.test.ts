@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import packageJson from '../package.json'
-import { Core, createCore, hello, VERSION } from './index.ts'
+import { Core, createCore, hello, VERSION } from './core.ts'
 
 describe('hello', () => {
   it('greets the default world', () => {

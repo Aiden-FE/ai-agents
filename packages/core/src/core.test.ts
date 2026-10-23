@@ -1,34 +1,64 @@
-import { describe, expect, it } from 'vitest'
+import { expect, test } from 'vitest';
+import { resolveModel } from './core.ts';
 
-import packageJson from '../package.json'
-import { Core, createCore, hello, VERSION } from './core.ts'
+type ModelMetadata = { provider: string; modelId: string };
 
-describe('hello', () => {
-  it('greets the default world', () => {
-    expect(hello()).toBe('Hello, world!')
-  })
+test('resolves an OpenAI completion model', () => {
+  const model = resolveModel({
+    defaultProvider: 'local',
+    defaultModel: 'completion-model',
+    providers: [
+      {
+        name: 'local',
+        baseUrl: 'http://127.0.0.1',
+        apiKey: 'key',
+        protocol: 'openai-completion',
+      },
+    ],
+  });
 
-  it('greets a named user', () => {
-    expect(hello('maka')).toBe('Hello, maka!')
-  })
-})
+  expect(model as ModelMetadata).toMatchObject({
+    provider: 'local.completion',
+    modelId: 'completion-model',
+  });
+});
 
-describe('Core', () => {
-  it('creates an instance with the default name and package version', () => {
-    const core = createCore()
+test('resolves an OpenAI response model', () => {
+  const model = resolveModel({
+    defaultProvider: 'local',
+    defaultModel: 'response-model',
+    providers: [
+      {
+        name: 'local',
+        baseUrl: 'http://127.0.0.1',
+        apiKey: 'key',
+        protocol: 'openai-response',
+      },
+    ],
+  });
 
-    expect(core).toBeInstanceOf(Core)
-    expect(VERSION).toBe(packageJson.version)
-    expect(core.snapshot()).toEqual({
-      name: 'ai-agents',
-      version: VERSION,
-    })
-  })
+  expect(model as ModelMetadata).toMatchObject({
+    provider: 'local.responses',
+    modelId: 'response-model',
+  });
+});
 
-  it('preserves the configured name in its snapshot', () => {
-    expect(createCore({ name: 'my-agent' }).snapshot()).toEqual({
-      name: 'my-agent',
-      version: VERSION,
-    })
-  })
-})
+test('resolves API keys from an environment variable', () => {
+  process.env.TEST_PROVIDER_KEY = 'secret';
+
+  const model = resolveModel({
+    defaultProvider: 'local',
+    defaultModel: 'completion-model',
+    providers: [
+      {
+        name: 'local',
+        baseUrl: 'http://127.0.0.1',
+        apiKey: '$TEST_PROVIDER_KEY',
+        protocol: 'openai-completion',
+      },
+    ],
+  });
+
+  expect(model as ModelMetadata).toMatchObject({ provider: 'local.completion' });
+  delete process.env.TEST_PROVIDER_KEY;
+});

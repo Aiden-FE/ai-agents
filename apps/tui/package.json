@@ -7,7 +7,7 @@
     "node": ">=24"
   },
   "bin": {
-    "maka-tui": "./dist/main.mjs"
+    "maka": "./dist/main.mjs"
   },
   "scripts": {
     "build": "tsdown",
@@ -21,9 +21,12 @@
     "format": "biome format --write ."
   },
   "dependencies": {
+    "@ai-sdk/openai": "4.0.81",
+    "@ai-sdk/openai-compatible": "3.0.59",
     "@ai-sdk/tui": "^1.0.123",
     "@maka/core": "workspace:*",
     "ai": "^7.0.122",
+    "es-toolkit": "1.52.0",
     "yaml": "^2.9.1",
     "zod": "^4.6.5"
   },

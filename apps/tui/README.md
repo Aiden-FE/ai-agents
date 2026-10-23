@@ -13,6 +13,13 @@ cp apps/tui/.env.example apps/tui/.env
 pnpm --filter @maka/tui dev
 ```
 
+启动时可用 `--profile` 选择 profile，并覆盖 `.env` 或环境变量里的 `MAKA_PROFILE`：
+
+```bash
+maka-tui --profile work
+maka-tui --profile=work
+```
+
 `dev` 会先执行 `tsdown` 构建，再用 `node --env-file-if-exists=.env dist/main.mjs` 启动。改完 `src/` 重新执行即可。
 
 构建由 **tsdown** 完成：`@maka/core` 的源码会被打进产物（它的 dev export 指向 `src/*.ts`），其余依赖 `ai` / `yaml` / `zod` / `@ai-sdk/tui` 保持 external。`tsdown.config.ts` 里的 `deps.onlyBundle: []` 会让任何意外的依赖内联直接让构建失败，避免出现两份 `ai` 实例。

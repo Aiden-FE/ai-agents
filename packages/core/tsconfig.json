@@ -5,7 +5,10 @@
     "outDir": "dist",
     "resolveJsonModule": true,
     "types": ["node"],
-    "erasableSyntaxOnly": true
+    "erasableSyntaxOnly": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src"]
 }

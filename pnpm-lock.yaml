@@ -190,6 +190,12 @@ importers:
 
   apps/tui:
     dependencies:
+      '@ai-sdk/openai':
+        specifier: 4.0.81
+        version: 4.0.81(zod@4.6.5)
+      '@ai-sdk/openai-compatible':
+        specifier: 3.0.59
+        version: 3.0.59(zod@4.6.5)
       '@ai-sdk/tui':
         specifier: ^1.0.123
         version: 1.0.123(zod@4.6.5)
@@ -199,6 +205,9 @@ importers:
       ai:
         specifier: ^7.0.122
         version: 7.0.122(zod@4.6.5)
+      es-toolkit:
+        specifier: 1.52.0
+        version: 1.52.0
       yaml:
         specifier: ^2.9.1
         version: 2.9.1
@@ -224,9 +233,18 @@ importers:
 
   packages/core:
     dependencies:
+      '@ai-sdk/openai':
+        specifier: 4.0.81
+        version: 4.0.81(zod@4.6.5)
+      '@ai-sdk/openai-compatible':
+        specifier: 3.0.59
+        version: 3.0.59(zod@4.6.5)
       ai:
         specifier: ^7.0.122
         version: 7.0.122(zod@4.6.5)
+      es-toolkit:
+        specifier: ^1.52.0
+        version: 1.52.0
       yaml:
         specifier: ^2.9.1
         version: 2.9.1
@@ -254,6 +272,18 @@ packages:
 
   '@ai-sdk/gateway@4.0.100':
     resolution: {integrity: sha512-diJXVW2D1/NUW2JSg99b8yTpN8eW9AK5ntXSW4B7NrsW5STqwcGJAAOFlfOrQBzYHJlWReyy11WefWetdx4Qsw==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
+  '@ai-sdk/openai-compatible@3.0.59':
+    resolution: {integrity: sha512-ZRWWHhLTyVT0NSy+CnGuRAushwRRxXxpX0XMPgUjz+LTR3IP3nE155NkPhrD06yCT8fTKX+xlzF2nEg0P/LjGQ==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
+  '@ai-sdk/openai@4.0.81':
+    resolution: {integrity: sha512-xLKx+4pbRvKF1gaXckfg0gQxDppi5SVYQsB/gkkzElCjAZ1OYDJB7xp+CvXIZGI6fzspricSfOl7MxEDvEdilg==}
     engines: {node: '>=22'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -906,6 +936,9 @@ packages:
   es-module-lexer@2.3.2:
     resolution: {integrity: sha512-poHGpORABojJJucnV9KbOavETW8lBVnphkW77ER5/BQ5Fz7oXSoCNek7IH3vR5nRjdsEz926ibFYX8KtLQmdyw==}
 
+  es-toolkit@1.52.0:
+    resolution: {integrity: sha512-XTNEJQh1tY1ZJVcf6ayP/2n4ZPyaHlW2FWs7xvw5ddPuhUVjLD3olQVQS7kf58JbAB48iL0uL/jerTrjtV3lDA==}
+
   estree-walker@3.0.3:
     resolution: {integrity: sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g==}
 
@@ -1341,6 +1374,18 @@ snapshots:
       '@ai-sdk/provider': 4.0.19
       '@ai-sdk/provider-utils': 5.0.51(zod@4.6.5)
       '@vercel/oidc': 3.2.0
+      zod: 4.6.5
+
+  '@ai-sdk/openai-compatible@3.0.59(zod@4.6.5)':
+    dependencies:
+      '@ai-sdk/provider': 4.0.19
+      '@ai-sdk/provider-utils': 5.0.51(zod@4.6.5)
+      zod: 4.6.5
+
+  '@ai-sdk/openai@4.0.81(zod@4.6.5)':
+    dependencies:
+      '@ai-sdk/provider': 4.0.19
+      '@ai-sdk/provider-utils': 5.0.51(zod@4.6.5)
       zod: 4.6.5
 
   '@ai-sdk/provider-utils@5.0.51(zod@4.6.5)':
@@ -1821,6 +1866,8 @@ snapshots:
   empathic@2.1.0: {}
 
   es-module-lexer@2.3.2: {}
+
+  es-toolkit@1.52.0: {}
 
   estree-walker@3.0.3:
     dependencies:

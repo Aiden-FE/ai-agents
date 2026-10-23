@@ -49,6 +49,20 @@ profiles:
     model: gpt-5-mini
 ```
 
+`config.yaml` 也可以注册供应商并选择模型：
+
+```yaml
+defaultProvider: local
+defaultModel: qwen3.8-27b
+providers:
+  - name: local
+    baseUrl: http://127.0.0.1:8000/v1
+    apiKey: $LOCAL_API_KEY
+    protocol: openai-response
+```
+
+`defaultProvider` 省略时会使用 `providers` 的第一项；`defaultModel` 是运行时必需字段。`openai-response` 调用 OpenAI Responses API（`/responses`），`openai-completion` 调用 OpenAI Completion API（`/completions`）。以 `$` 开头的 API key 会从环境变量读取，不要把真实密钥提交到 profile 文件。
+
 profile 里的字段都是可选的，只写要覆盖的部分。schema 用 `strictObject` 定义，未知键会直接报错而不是被静默忽略 —— 拼错 `modle` 会得到明确的 `Unrecognized key` 报错和所在路径。
 
 文件里有 profile 但既没指定 `MAKA_PROFILE` 也没有 `defaultProfile` 时会抛错，并列出可选的 profile 名；文件不存在不算错误。
@@ -62,6 +76,7 @@ profile 里的字段都是可选的，只写要覆盖的部分。schema 用 `str
 | `loadAgentConfig(env?): AgentConfig`                  | 读 profile 文件并合并环境变量，shell 推荐入口  |
 | `resolveAgentConfig(env?, profile?): AgentConfig`     | 纯函数：默认值 < profile < 环境变量            |
 | `createAgent(config): ToolLoopAgent`                  | 用 Vercel AI Gateway 创建 agent                |
+| `resolveModel(profile?): LanguageModel`               | 用 profile 供应商创建 AI SDK 可用的模型实例     |
 | `DEFAULT_AGENT_MODEL` / `DEFAULT_AGENT_INSTRUCTIONS` | 内置默认值                                    |
 | `AgentConfig` / `AgentEnv` / `ToolLoopAgent`          | 类型                                          |
 

@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsdown'
+import { defineConfig } from 'tsdown';
 
 export default defineConfig({
   entry: ['./src/main.ts'],
@@ -17,4 +17,4 @@ export default defineConfig({
     // that is also loaded by @ai-sdk/tui.
     onlyBundle: [],
   },
-})
+});
